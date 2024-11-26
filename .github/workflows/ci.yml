@@ -15,40 +15,40 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-   
+      # Étape 1: Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v2
 
-   
+      # Étape 2: Set up Node.js
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '16'
+          node-version: '20'
 
-   
+      # Étape 3: Install dependencies
       - name: Install dependencies
         run: npm install
 
-      
+      # Étape 4: Run linter
       - name: Run linter
         run: npm run lint
 
-     
+      # Étape 5: Run tests
       - name: Run tests
         run: npm run test
 
-
+      # Étape 6: Build project
       - name: Build project
         run: npm run build
 
-     
+      # Étape 7: Build Docker image
       - name: Build Docker image
         run: docker build -t myusername/myapp:latest .
 
-    
+      # Étape 8: Log in to Docker Hub
       - name: Log in to Docker Hub
         run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
 
-     
+      # Étape 9: Push Docker image to Docker Hub
       - name: Push Docker image to Docker Hub
         run: docker push myusername/myapp:latest
