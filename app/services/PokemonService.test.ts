@@ -1,14 +1,7 @@
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { describe, it, expect, beforeEach } from 'vitest';
 import { PokemonService } from './PokemonService';
 import { PokeApiClient } from './PokeApiClient';
 import { Pokemon } from './pokemon';
-import fetch from 'node-fetch';
-
-vi.mock('node-fetch', () => ({
-  default: vi.fn(() => Promise.resolve({
-    json: () => Promise.resolve({ results: [] })
-  }))
-}));
 
 describe('PokemonService', () => {
   let service: PokemonService;
