@@ -43,12 +43,15 @@ jobs:
 
       # Étape 7: Build Docker image
       - name: Build Docker image
-        run: docker build -t myusername/myapp:latest .
+        run: docker build -t diawara1/myapp:latest .
 
       # Étape 8: Log in to Docker Hub
       - name: Log in to Docker Hub
+        env:
+          DOCKER_HUB_USERNAME: ${{ secrets.DOCKER_HUB_USERNAME }}
+          DOCKER_HUB_PASSWORD: ${{ secrets.DOCKER_HUB_PASSWORD }}
         run: echo "${{ secrets.DOCKER_HUB_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_HUB_USERNAME }}" --password-stdin
 
       # Étape 9: Push Docker image to Docker Hub
       - name: Push Docker image to Docker Hub
-        run: docker push myusername/myapp:latest
+        run: docker push diawara1/myapp:latest
